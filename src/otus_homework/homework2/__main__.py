@@ -6,8 +6,8 @@ from otus_homework.homework2.model import PhoneBook
 from otus_homework.homework2.view import ConsoleView
 
 
-def main()->None:
-    path = Path(__file__).parent /  "data" / "phonebook.json"
+def main() -> None:
+    path = Path(__file__).parent / "data" / "phonebook.json"
     view = ConsoleView()
     phonebook = PhoneBook(path)
     try:

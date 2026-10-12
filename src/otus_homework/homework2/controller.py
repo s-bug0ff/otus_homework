@@ -1,4 +1,11 @@
-from otus_homework.homework2.exceptions import EmptyNameError, EmptyPhoneError, InvalidContactIdError, InvalidMenuChoiceError, InvalidPhoneError, PhonebookError
+from otus_homework.homework2.exceptions import (
+    EmptyNameError,
+    EmptyPhoneError,
+    InvalidContactIdError,
+    InvalidMenuChoiceError,
+    InvalidPhoneError,
+    PhonebookError,
+)
 from otus_homework.homework2.model import is_phone
 from otus_homework.homework2.view import ConsoleView
 
@@ -13,7 +20,9 @@ class PhoneBookController:
             choice = self.view.get_choice()
             try:
                 if not choice.isdigit():
-                    raise InvalidMenuChoiceError("Введено неправильное действие, выберите другое")
+                    raise InvalidMenuChoiceError(
+                        "Введено неправильное действие, выберите другое"
+                    )
                 if int(choice) == 1:
                     self.list_contact()
                 elif int(choice) == 2:
@@ -28,7 +37,9 @@ class PhoneBookController:
                     self.view.show_message("Выход")
                     break
                 else:
-                    raise InvalidMenuChoiceError("Введено неправильное действие, выберите другое")
+                    raise InvalidMenuChoiceError(
+                        "Введено неправильное действие, выберите другое"
+                    )
             except PhonebookError as error:
                 self.view.show_message(str(error))
 
@@ -85,11 +96,11 @@ class PhoneBookController:
 
     def delete_contact(self) -> None:
         self.view.show_message("Удалить контакт")
-        id = self.view.ask("Введите id контакта: ")
-        if not id.isdigit():
+        contact_id = self.view.ask("Введите id контакта: ")
+        if not contact_id.isdigit():
             raise InvalidContactIdError("Введен неправильный id")
 
-        contact = self.phonebook.find_by_id(int(id))
+        contact = self.phonebook.find_by_id(int(contact_id))
         self.view.show_contact(contact)
         answer = self.view.ask("Удалить? y/n: ").lower()
         if answer != "y":

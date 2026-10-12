@@ -3,7 +3,15 @@ class ConsoleView:
         print(message)
 
     def get_choice(self) -> str:
-        choice = input("Выберите действие:\n1 - Показать справочник\n2 - Поиск контакта\n3 - Добавить контакт\n4 - Изменить контакт\n5 - Удалить контакт\n6 - Выход\n").strip()
+        choice = input(
+            "Выберите действие:\n"
+            "1 - Показать справочник\n"
+            "2 - Поиск контакта\n"
+            "3 - Добавить контакт\n"
+            "4 - Изменить контакт\n"
+            "5 - Удалить контакт\n"
+            "6 - Выход\n"
+        ).strip()
         return choice
 
     def ask(self, text) -> str:
@@ -20,8 +28,13 @@ class ConsoleView:
                 contact.first_name,
                 contact.second_name,
                 contact.phone,
-                contact.comment
+                contact.comment,
             )
 
     def show_contact(self, contact) -> None:
-        print(contact.id, contact.first_name, contact.second_name, contact.phone)
+        print(
+            contact.id,
+            contact.first_name,
+            contact.second_name,
+            contact.phone,
+        )

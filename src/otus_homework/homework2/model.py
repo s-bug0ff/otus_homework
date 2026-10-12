@@ -1,11 +1,17 @@
 import json
 
-from otus_homework.homework2.exceptions import ContactNotFoundError, CorruptedPhonebookError, EmptySearchQueryError, PhonebookNotFoundError, PhonebookSaveError
+from otus_homework.homework2.exceptions import (
+    ContactNotFoundError,
+    CorruptedPhonebookError,
+    EmptySearchQueryError,
+    PhonebookNotFoundError,
+    PhonebookSaveError,
+)
 
 
 class Contact:
-    def __init__(self, id, first_name, second_name, phone, comment):
-        self.id = id
+    def __init__(self, contact_id, first_name, second_name, phone, comment):
+        self.id = contact_id
         self.first_name = first_name
         self.second_name = second_name
         self.phone = phone
@@ -112,18 +118,20 @@ class PhoneBook:
                 found.append(contact)
         return found
 
-    def next_id(self)->int:
+    def next_id(self) -> int:
         if len(self.contacts) == 0:
             return 1
 
-        return max(contact.id for contact in self.contacts) + 1;
+        return max(contact.id for contact in self.contacts) + 1
 
     def reindex(self) -> None:
         for index, contact in enumerate(self.contacts, start=1):
             contact.id = index
 
     def add(self, first_name, second_name, phone, comment) -> None:
-        contact = Contact(self.next_id(), first_name, second_name, phone, comment)
+        contact = Contact(
+            self.next_id(), first_name, second_name, phone, comment
+        )
         self.contacts.append(contact)
         self.save()
 
